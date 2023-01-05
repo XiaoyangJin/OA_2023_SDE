@@ -4,6 +4,6 @@ public class Error_range_digit {
     long test = 10018;
     long res = 0;
 
-    
+
 
 }
