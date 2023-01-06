@@ -1,3 +1,5 @@
+
+
 public class Word_compression {
     /**
      * A student decides to perform some operations on big words to compress them, so they become easy to remember.
@@ -12,14 +14,39 @@ public class Word_compression {
      * of at least one character.
      */
 
-    //use 2 pointers
-    String word = "abbcccb";
-    char[] array = word.toCharArray();
-    int slow = -1; //the first un-repeated element
-    int fast = 0;
-    int count = 1;
+    public static String compressWord(String word, int k){
+        //use 2 pointers
+        //String word = "abbcccb";
+        char[] arr = word.toCharArray();
+        int slow = -1; //the first un-repeated element
+        int fast = 0;
+        int count = 1;
 
-//    while(fast < array.length){
-//
-//    }
+        while(fast < arr.length){
+            while(fast + 1 < arr.length && arr[fast + 1] == arr[fast]){
+                count++;
+                fast++;
+            }
+            while(count >= k){
+                count %= 3;
+            }
+
+            for(int i = 0; i < count; i++){
+                arr[slow + 1] = arr[fast];
+                slow++;
+            }
+            fast++;
+            count = 1;
+
+            while(slow >= 0 && fast < arr.length && arr[slow] == arr[fast]){
+                slow--;
+                count++;
+            }
+        }
+        return new String(arr, 0, slow + 1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(compressWord("abbcccb", 3));
+    }
 }
